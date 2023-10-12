@@ -113,8 +113,6 @@ class DownloadThread(QThread):
 
         # Replace (*) in the URL with zero-padded segment number
         url = self.url.replace("(*)", str(i).zfill(self.zero_padding))
-
-        self.update_signal.emit(f"Request URL: {url}")
         async with session.get(url, headers={"Referer": self.referer_url}) as response:
             if response.status == 200:
                 with open(file_path, "wb") as f:
